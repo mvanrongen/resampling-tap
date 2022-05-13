@@ -18,6 +18,30 @@ xaringanExtra::style_panelset(font_family = "inherit")
 - Understand the advantages and limitations of permutation techniques
 :::
 
+## Introduction
+
+In the [Core statistics sessions](https://mvanrongen.github.io/corestats-in-r_tidyverse/index.html) we have covered a lot of the more traditional statistics. As became apparent throughout these sessions, the underlying principles between a lot the statistical tests are actually quite similar (which of course makes our life a lot easier!).
+
+One of the main topics we discussed (at length), is the need for checking _assumptions_. There are multiple assumptions underlying the vast majority of statistical tests and, unfortunately, these assumptions are often ignored, forgotten or otherwise not dealt with.
+
+For example, the assumption about the parent distribution is often that it is **normally distributed** and that the variance (or spread) between different groups is more or less equal. Also, the statistic that is most often tested is the mean. If all of those assumptions are met, then life is great! Actually, if you find yourself in that situation, you can probably stop reading now, grab yourself a cup of tea and enjoy your day.
+
+But...
+
+data is unfortunately often not so kind to us. What if your data looks like this:
+
+```{r git_options, results='markup', echo=FALSE, purl=FALSE}
+knitr::include_graphics("img/resampling_not-normal.png")
+```
+
+Oh dear. That does not fit into our perfect world, does it? The data are definitely _not_ normally distributed. And we are also very unlikely to care about the means either. After all, the data appear to be bi-modal and if we're comparing control to treatment we're more likely to care about the _difference_ in means between the two peaks between the two groups.
+
+This presents us with a bit of an issue, because that does not fit within any of the statistical tests we've covered. To be honest, there are actually no obvious statistical tests at all that we could use here. So, what's a statistician supposed to do in this case?
+
+Well, like we discussed in the lecture, if our null hypothesis indicates that there is no difference in the means, then we could actually swap any of the data points with impunity! After all, randomly getting data points from the control group and swapping them for data points from the treatment group should, on average, have no effect on the difference in means - _if the null hypothesis is true_!
+
+To illustrate this, we're going to run through an example between two groups of mice (poor things), where we've recorded their weight based on a certain diet. In this case we are actually interested in the difference in mean weight, but the beauty of this technique is that you can define any statistic you'd like. Of course you'd still have to justify that it is a meaningful statistic which in the case above, where we looked at the difference in means between the peaks, shouldn't be too much of a problem.
+
 ## Libraries and functions
 
 ::::: {.panelset}
@@ -36,7 +60,7 @@ xaringanExtra::style_panelset(font_family = "inherit")
 ## Purpose and aim
 If we wish to test for a difference between two groups in the case where the assumptions of a two-sample t-test just aren’t met, then a two-sample permutation test procedure is appropriate. It is also appropriate even if the assumptions of a t-test are met, but in that case, it would be easier to just do the t-test.
 
-One of the additional benefits of permutation test is that we aren’t just restricted to testing hypotheses about the means of the two groups. We can test hypotheses about absolutely anything we want! So, we could see if the ranges of the two groups differed significantly etc.
+One of the additional benefits of a permutation test is that we aren’t just restricted to testing hypotheses about the means of the two groups. We can test hypotheses about absolutely anything we want! So, we could see if the ranges of the two groups differed significantly etc.
 
 
 ## Data and hypotheses
@@ -361,13 +385,13 @@ penguins
 :::
 :::::
 
-We can see that there are 8 variables. We'll come back to some of them in later sessions, but for now we're focussing on 3:
+We can see that there are 8 variables. We'll come back to some of them in later sessions, but for now we're focusing on 3:
 
 1. `species` the type of penguin
 2. `flipper_length_mm` the length of the flipper in mm
 3. `bill_length_mm` the length of the bill in mm
 
-To practise, we'll look at the relationship between flipper length and bill length, comparing the two species we selected.
+To practice, we'll look at the relationship between flipper length and bill length, comparing the two species we selected.
 
 ::::: {.panelset}
 
@@ -401,7 +425,7 @@ observed_fit <- penguins %>%
 ```
 
 :::note
-As an aside, in the Power analysis session of Core statistics we looked at model evaluation. We could do something similar here to see if there is an interaction between `flipper_length_mm` and `species`:
+As an aside, in the [Power analysis session](https://mvanrongen.github.io/corestats-in-r_tidyverse/power-analysis.html) of Core statistics we looked at model evaluation. We could do something similar here to see if there is an interaction between `flipper_length_mm` and `species`:
 ```{r}
 # define the model
 lm_penguins <- lm(bill_length_mm ~ flipper_length_mm * species,
@@ -491,5 +515,5 @@ Finally, the ANOVA confirms what we're seeing with the permutation test: that th
 - We can use the workflow from the `infer` package, which is part of `tidymodels` to perform permutations on our data
 - We `specify()` a model, use `hypothesise()` to define the null hypothesis, `generate()` reshuffled data and `calculate()` the statistic of interest
 - We can reiterate over this workflow to obtain a distribution of p-values
-
+- This distribution of p-values gives you an indication on how reliable your statistical result it
 :::
