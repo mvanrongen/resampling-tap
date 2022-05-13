@@ -22,11 +22,11 @@ The materials on resampling techniques are part of a larger series of statistica
 
 This approach encourages students to engage and think about the wider context of what they are doing and why.
 
-### Assessment
+## Assessment
 Assessment of individual progress occurs through ongoing formative assessment exercises, rather than a formal assessment. The focus of the course is very much on encouraging an **intuitive understanding** of the underlying principals, rather than a mathematical one. As such, there are no mathematical derivations (and definitely no pen and paper calculations!).
 
-### Evaluation
-All of the course within the Bioinformatics Training Facility get surveyed using `surveymonkey` surveys. The exact content of the surveys is too large to cover here, but with these surveys we for example gain insight on how participants engage with the course materials - both during and after the course. We also assess after six months if they have used the knowledge they've gained in their own research.
+## Evaluation
+All of the courses within the Bioinformatics Training Facility get surveyed using `surveymonkey` surveys. The exact content of the surveys is too large to cover here, but with these surveys we for example gain insight on how participants engage with the course materials - both during and after the course. We also assess after six months if they have used the knowledge they've gained in their own research.
 
 A less formal way of assessing how participants engage with the materials is through their questions in a shared Q&A document that gets used during the course. Usually if questions are technical in nature I can tell that participants are focusing on the practical implementation of the coding. Although this is understandable, particularly during early sessions, the aim is get participants to ask questions that are at a deeper level, for example asking for reasons why certain techniques are used, or volunteering if alternative techniques are also valid. This shows me that participants are thinking beyond what they're learning - often relating it to the context of their own research.
 
